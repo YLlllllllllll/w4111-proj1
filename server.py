@@ -745,6 +745,9 @@ def cart():
 
     return render_template("cart.html", **context)
 
+
+
+
 @app.route('/payment', methods=['POST'])
 def payment():
     global product_ids
@@ -753,7 +756,7 @@ def payment():
     customer_id = session.get("customer_id", None)
 
     if not customer_id:
-        error_message = "Please Sign Up an account or Log In your account."
+        error_message = "Please Sign Up and Login."
 
     if not error_message:
         order_items = []
@@ -822,6 +825,7 @@ def account_post():
 
     print(context)
     return render_template("account.html", **context)
+
 
 @app.route('/order', methods=['GET', 'POST'])
 def order_post():

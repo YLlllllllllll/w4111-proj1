@@ -61,26 +61,70 @@
       flex: 1;
       background-color: #F3F3F3;
     }
-  </style>
-  <script>
-    function postRequest(url) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          document.location.href = url;
-        }
-      }
-      xhr.send();
+    .dropdown {
+      position: relative;
+      display: inline-block;
     }
-  </script>
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #232F3E;
+      min-width: 110px;
+      box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content button {
+      padding: 5px 10px;
+      background-color: #232F3E;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content button:hover {
+      background-color: #131921; /* Change the background color when hovering */
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    html {
+      overflow-y: scroll;
+    }
+    
+    body {
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <button onclick="postRequest('/home')">Home</button>
+    <form action="/home" method="post">
+      <button type="submit">Home</button>
+    </form> 
     <h1>Little_A</h1>
     <div>
+      <div class="dropdown">
+        <button>My Account</button>
+        <div class="dropdown-content">
+          <form action="/signup" method="post">
+            <button type="submit">Sign Up</button>
+          </form>
+          <form action="/login" method="post">
+            <button type="submit">Login</button>
+          </form>
+          <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
       <form action="/account" method="post" style="display: inline;">
         <button type="submit">Account</button>
       </form>
@@ -91,36 +135,36 @@
   </header>
   <nav>
     <form action="/electronics" method="post">
-      <button type="submit">Electronics</button>
-    </form>
-    <form action="/clothing" method="post">
-      <button type="submit">Clothing</button>
-    </form>
-    <form action="/home_and_garden" method="post">
-      <button type="submit">Home and Garden</button>
-    </form>
-    <form action="/health_and_beauty" method="post">
-      <button type="submit">Health and Beauty</button>
-    </form>
-    <form action="/toys_and_games" method="post">
-      <button type="submit">Toys and Games</button>
-    </form>
-    <form action="/sports_and_outdoors" method="post">
-      <button type="submit">Sports and Outdoors</button>
-    </form>
-    <form action="/book_and_media" method="post">
-      <button type="submit">Book and Media</button>
-    </form>
-    <form action="/automotive" method="post">
-      <button type="submit">Automotive</button>
-    </form>
-    <form action="/pet_supplies" method="post">
-      <button type="submit">Pet Supplies</button>
-    </form>
-    <form action="/food_and_beverage" method="post">
-      <button type="submit">Food and Beverage</button>
-    </form>
-  </nav>
+        <button type="submit">Electronics</button>
+      </form>
+      <form action="/clothing" method="post">
+        <button type="submit">Clothing</button>
+      </form>
+      <form action="/home_and_garden" method="post">
+        <button type="submit">Home and Garden</button>
+      </form>
+      <form action="/health_and_beauty" method="post">
+        <button type="submit">Health and Beauty</button>
+      </form>
+      <form action="/toys_and_games" method="post">
+        <button type="submit">Toys and Games</button>
+      </form>
+      <form action="/sports_and_outdoors" method="post">
+        <button type="submit">Sports and Outdoors</button>
+      </form>
+      <form action="/book_and_media" method="post">
+        <button type="submit">Book and Media</button>
+      </form>
+      <form action="/automotive" method="post">
+        <button type="submit">Automotive</button>
+      </form>
+      <form action="/pet_supplies" method="post">
+        <button type="submit">Pet Supplies</button>
+      </form>
+      <form action="/food_and_beverage" method="post">
+        <button type="submit">Food and Beverage</button>
+      </form>
+    </nav>
   <main>
   <h2>Order Information</h2>
   <form action="/payment" method="post">

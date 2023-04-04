@@ -3,16 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Little_A - Account</title>
+  <title>Little_A</title>
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
     }
+    .background-container {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 50px);
+      overflow: hidden;
+    }
+    .background-image {
+      width: 100%;
+      height: auto;
+      opacity: 1.5;
+      filter: brightness(90%);
+    }
     header {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      background-color: #232F3E;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: #232F3E;
+        text-align: center; /* Add this line */
     }
     header a, header button {
       color: white;
@@ -36,16 +53,6 @@
       margin: 0 10px;
       background-color: #F3F3F3;
     }
-    .account-info {
-      display: flex;
-      flex-direction: column;
-      width: 50%;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .account-info strong {
-      font-size: 14px;
-    }
     button {
       padding: 5px 10px;
       background-color: #232F3E;
@@ -56,6 +63,62 @@
     }
     button:hover {
       background-color: #131921;
+    }
+    .container {
+      background-color: transparent;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      min-width: 800px; /* 设置一个最小宽度 */
+      margin: 0 auto; /* 让容器水平居中 */
+      overflow-x: hidden; /* 隐藏水平滚动条 */
+      }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #232F3E;
+      min-width: 110px;
+      box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content button {
+      padding: 5px 10px;
+      background-color: #232F3E;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content button:hover {
+      background-color: #131921; /* Change the background color when hovering */
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .account-info {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .account-info strong {
+      font-size: 14px;
     }
     /* Additional CSS for product box */
     main {
@@ -74,26 +137,36 @@
       margin-bottom: 10px;
       width: 50%;
     }
-  </style>
-  <script>
-    function postRequest(url) {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", url, true);
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-          document.location.href = url;
-        }
+    html {
+        overflow-y: scroll;
       }
-      xhr.send();
-    }
-  </script>
+
+    body {
+        height: 100%;
+      }
+  </style>
 </head>
 <body>
   <header>
-    <button onclick="postRequest('/home')">Home</button>
+    <form action="/home" method="post">
+      <button type="submit">Home</button>
+    </form>  
     <h1>Little_A</h1>
     <div>
+      <div class="dropdown">
+        <button>My Account</button>
+        <div class="dropdown-content">
+          <form action="/signup" method="post">
+            <button type="submit">Sign Up</button>
+          </form>
+          <form action="/login" method="post">
+            <button type="submit">Login</button>
+          </form>
+          <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
       <form action="/account" method="post" style="display: inline;">
         <button type="submit">Account</button>
       </form>
@@ -181,26 +254,12 @@
 <p>
     <form method="post" action="{{ url_for('cancel_order') }}">
         <input type="hidden" name="order_id" value="{{ order.order_id }}">
-
-        <!-- Add checkboxes for cancel reasons -->
-        <label>
-            <input type="checkbox" name="cancel_reason[]" value="I do not want it">
-            I do not want it
-        </label><br>
-        <label>
-            <input type="checkbox" name="cancel_reason[]" value="order the wrong product">
-            Order the wrong product
-        </label><br>
-
         <button type="submit">Cancel Order</button>
     </form>
 </p>
 
-
         </div>
     {% endfor %}
 </main>
-
-
 </body>
 </html>

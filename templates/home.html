@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Little_A</title>
   <style>
-		html, body {
+    html, body {
       height: 100%;
       margin: 0;
     }
@@ -25,10 +25,11 @@
       filter: brightness(90%);
     }
     header {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      background-color: #232F3E;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: #232F3E;
+        text-align: center; /* Add this line */
     }
     header a, header button {
       color: white;
@@ -64,13 +65,13 @@
       background-color: #131921;
     }
     .container {
-			background-color: transparent;
-			padding: 20px;
-			color: white;
-			text-align: center;
-			font-size: 36px;
-			font-weight: bold;
-		}
+        background-color: transparent;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        font-size: 36px;
+        font-weight: bold;
+                }
     .dropdown {
       position: relative;
       display: inline-block;
@@ -102,15 +103,28 @@
       background-color: #131921; /* Change the background color when hovering */
     }
 
-
     .dropdown:hover .dropdown-content {
       display: block;
     }
+    .container {
+        min-width: 800px; /* 设置一个最小宽度 */
+        margin: 0 auto; /* 让容器水平居中 */
+        overflow-x: hidden; /* 隐藏水平滚动条 */
+    }
+    html {
+        overflow-y: scroll;
+      }
+      
+      body {
+        height: 100%;
+      }
   </style>
 </head>
 <body>
   <header>
-    <button onclick="postRequest('/home')">Home</button>
+    <form action="/home" method="post">
+      <button type="submit">Home</button>
+    </form>
     <h1>Little_A</h1>
     <div>
       <div class="dropdown">
@@ -136,40 +150,39 @@
     </div>
   </header>
   <nav>
-    <form action="/electronics" method="post" style="display: inline;">
-      <button type="submit">Electronics</button>
-    </form>
-    <form action="/clothing" method="post" style="display: inline;">
-      <button type="submit">Clothing</button>
-    </form>
-    <form action="/home_and_garden" method="post" style="display: inline;">
-      <button type="submit">Home and Garden</button>
-    </form>
-    <form action="/health_and_beauty" method="post" style="display: inline;">
-      <button type="submit">Health and Beauty</button>
-    </form>
-    <form action="/toys_and_games" method="post" style="display: inline;">
-      <button type="submit">Toys and Games</button>
-    </form>
-    <form action="/sports_and_outdoors" method="post" style="display: inline;">
-      <button type="submit">Sports and Outdoors</button>
-    </form>
-    <form action="/book_and_media" method="post" style="display: inline;">
-      <button type="submit">Book and Media</button>
-    </form>
-    <form action="/automotive" method="post" style="display: inline;">
-      <button type="submit">Automotive</button>
-    </form>
-    <form action="/pet_supplies" method="post" style="display: inline;">
-      <button type="submit">Pet Supplies</button>
-    </form>
-    <form action="/food_and_beverage" method="post" style="display: inline;">
-      <button type="submit">Food and Beverage</button>
-    </form>
-  </nav>
+    <form action="/electronics" method="post">
+        <button type="submit">Electronics</button>
+      </form>
+      <form action="/clothing" method="post">
+        <button type="submit">Clothing</button>
+      </form>
+      <form action="/home_and_garden" method="post">
+        <button type="submit">Home and Garden</button>
+      </form>
+      <form action="/health_and_beauty" method="post">
+        <button type="submit">Health and Beauty</button>
+      </form>
+      <form action="/toys_and_games" method="post">
+        <button type="submit">Toys and Games</button>
+      </form>
+      <form action="/sports_and_outdoors" method="post">
+        <button type="submit">Sports and Outdoors</button>
+      </form>
+      <form action="/book_and_media" method="post">
+        <button type="submit">Book and Media</button>
+      </form>
+      <form action="/automotive" method="post">
+        <button type="submit">Automotive</button>
+      </form>
+      <form action="/pet_supplies" method="post">
+        <button type="submit">Pet Supplies</button>
+      </form>
+      <form action="/food_and_beverage" method="post">
+        <button type="submit">Food and Beverage</button>
+      </form>
+    </nav>
   <div class="background-container">
     <img src="https://i.redd.it/o0od47n48c3y.gif" alt="Background" class="background-image">
   </div>
 </body>
 </html>
-
