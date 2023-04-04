@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little_A - Account</title>
+  <style>
+    body {
+      margin: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #232F3E;
+    }
+    header a, header button {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      background-color: #232F3E;
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #F3F3F3;
+    }
+    nav a {
+      color: #131921;
+      text-decoration: none;
+      margin: 0 10px;
+      background-color: #F3F3F3;
+    }
+    .account-info {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .account-info strong {
+      font-size: 14px;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #232F3E;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #131921;
+    }
+    /* Additional CSS for product box */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+    .product-box {
+      display: flex;
+      flex-direction: column;
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 10px;
+      width: 50%;
+    }
+  </style>
+  <script>
+    function postRequest(url) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.location.href = url;
+        }
+      }
+      xhr.send();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <button onclick="postRequest('/home')">Home</button>
+    <h1>Little_A</h1>
+    <div>
+      <form action="/account" method="post" style="display: inline;">
+        <button type="submit">Account</button>
+      </form>
+      <form action="/order" method="post" style="display: inline;">
+        <button type="submit">Order History</button>
+      </form>
+    </div>
+  </header>
+  <nav>
+    <!-- Removed inline styles, as they are repetitive and unnecessary -->
+    <form action="/electronics" method="post">
+      <button type="submit">Electronics</button>
+    </form>
+    <form action="/clothing" method="post">
+      <button type="submit">Clothing</button>
+    </form>
+    <form action="/home_and_garden" method="post">
+      <button type="submit">Home and Garden</button>
+    </form>
+    <form action="/health_and_beauty" method="post">
+      <button type="submit">Health and Beauty</button>
+    </form>
+    <form action="/toys_and_games" method="post">
+      <button type="submit">Toys and Games</button>
+    </form>
+    <form action="/sports_and_outdoors" method="post">
+      <button type="submit">Sports and Outdoors</button>
+    </form>
+    <form action="/book_and_media" method="post">
+      <button type="submit">Book and Media</button>
+    </form>
+    <form action="/automotive" method="post">
+      <button type="submit">Automotive</button>
+    </form>
+    <form action="/pet_supplies" method="post">
+      <button type="submit">Pet Supplies</button>
+    </form>
+    <form action="/food_and_beverage" method="post">
+      <button type="submit">Food and Beverage</button>
+    </form>
+  </nav>
+<main>
+    <h2>Orders</h2>
+    {% for order in orders %}
+        <div class="product-box">
+            <p>User Name: {{ order.first_name}},  {{ order.last_name}}</p>
+            <p>Order ID: {{ order.order_id }}</p>
+            <p>Customer ID: {{ order.customer_id }}</p>
+            <p>Order Items:</p>
+            {% for item in order.order_items %}
+                <table class="product-table">
+                    <tr>
+                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Rating</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr>
+                        <td>{{ item.product_id }}</td>
+                        <td>{{ item.product_name }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>${{ item.product_unit_price }}</td>
+                        <td>
+                            <form class="rating-form" method="post" action="{{ url_for('submit_review') }}">
+                                <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                                <input type="hidden" name="order_id" value="{{ order.order_id }}">
+                                {% for i in range(6) %}
+                                    <input type="radio" id="rating-{{ i }}-{{ item.product_id }}" name="rating" value="{{ i }}" required>
+                                    <label for="rating-{{ i }}-{{ item.product_id }}">{{ i }}</label>
+                                {% endfor %}
+                            </form>
+                        </td>
+                        <td>
+                            <button form="rating-form" type="submit">Submit Rating</button>
+                        </td>
+                    </tr>
+                </table>
+            {% endfor %}
+        <p>Total Price: $ {{ order.total_price }}</p>
+            <p>Order Date: {{ order.order_date }}</p>
+            <p>Order Status: {{ order.order_status }}</p>
+            <!-- Add this inside the product-box div, after the Order Status paragraph -->
+<p>
+    <form method="post" action="{{ url_for('cancel_order') }}">
+        <input type="hidden" name="order_id" value="{{ order.order_id }}">
+
+        <!-- Add checkboxes for cancel reasons -->
+        <label>
+            <input type="checkbox" name="cancel_reason[]" value="I do not want it">
+            I do not want it
+        </label><br>
+        <label>
+            <input type="checkbox" name="cancel_reason[]" value="order the wrong product">
+            Order the wrong product
+        </label><br>
+
+        <button type="submit">Cancel Order</button>
+    </form>
+</p>
+
+
+        </div>
+    {% endfor %}
+</main>
+
+
+</body>
+</html>

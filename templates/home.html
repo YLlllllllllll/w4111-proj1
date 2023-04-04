@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little_A</title>
+  <style>
+		html, body {
+      height: 100%;
+      margin: 0;
+    }
+    .background-container {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 50px);
+      overflow: hidden;
+    }
+    .background-image {
+      width: 100%;
+      height: auto;
+      opacity: 1.5;
+      filter: brightness(90%);
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #232F3E;
+    }
+    header a, header button {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      background-color: #232F3E;
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #F3F3F3;
+    }
+    nav a {
+      color: #131921;
+      text-decoration: none;
+      margin: 0 10px;
+      background-color: #F3F3F3;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #232F3E;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #131921;
+    }
+    .container {
+			background-color: transparent;
+			padding: 20px;
+			color: white;
+			text-align: center;
+			font-size: 36px;
+			font-weight: bold;
+		}
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #232F3E;
+      min-width: 110px;
+      box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content button {
+      padding: 5px 10px;
+      background-color: #232F3E;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .dropdown-content button:hover {
+      background-color: #131921; /* Change the background color when hovering */
+    }
+
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <button onclick="postRequest('/home')">Home</button>
+    <h1>Little_A</h1>
+    <div>
+      <div class="dropdown">
+        <button>My Account</button>
+        <div class="dropdown-content">
+          <form action="/signup" method="post">
+            <button type="submit">Sign Up</button>
+          </form>
+          <form action="/login" method="post">
+            <button type="submit">Login</button>
+          </form>
+          <form action="/logout" method="post">
+            <button type="submit">Logout</button>
+          </form>
+        </div>
+      </div>
+      <form action="/account" method="post" style="display: inline;">
+        <button type="submit">Account</button>
+      </form>
+      <form action="/order" method="post" style="display: inline;">
+        <button type="submit">Order History</button>
+      </form>
+    </div>
+  </header>
+  <nav>
+    <form action="/electronics" method="post" style="display: inline;">
+      <button type="submit">Electronics</button>
+    </form>
+    <form action="/clothing" method="post" style="display: inline;">
+      <button type="submit">Clothing</button>
+    </form>
+    <form action="/home_and_garden" method="post" style="display: inline;">
+      <button type="submit">Home and Garden</button>
+    </form>
+    <form action="/health_and_beauty" method="post" style="display: inline;">
+      <button type="submit">Health and Beauty</button>
+    </form>
+    <form action="/toys_and_games" method="post" style="display: inline;">
+      <button type="submit">Toys and Games</button>
+    </form>
+    <form action="/sports_and_outdoors" method="post" style="display: inline;">
+      <button type="submit">Sports and Outdoors</button>
+    </form>
+    <form action="/book_and_media" method="post" style="display: inline;">
+      <button type="submit">Book and Media</button>
+    </form>
+    <form action="/automotive" method="post" style="display: inline;">
+      <button type="submit">Automotive</button>
+    </form>
+    <form action="/pet_supplies" method="post" style="display: inline;">
+      <button type="submit">Pet Supplies</button>
+    </form>
+    <form action="/food_and_beverage" method="post" style="display: inline;">
+      <button type="submit">Food and Beverage</button>
+    </form>
+  </nav>
+  <div class="background-container">
+    <img src="https://i.redd.it/o0od47n48c3y.gif" alt="Background" class="background-image">
+  </div>
+</body>
+</html>
+

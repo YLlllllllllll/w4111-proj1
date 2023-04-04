@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #131921;;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            background-color: #131921;
+        }
+    </style>
+</head>
+<body>
+<form action="/signup" method="POST">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required>
+
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" min="13" required>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" required>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="phone_number">Phone Number:</label>
+    <input type="tel" id="phone_number" name="phone_number" pattern="^\d{10}$" required>
+
+
+    <label for="membership">Add Membership:</label>
+    <select id="membership" name="membership"  required>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+    </select>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <p class="hint">Password must contain at least one uppercase letter (A, Z), one lowercase letter (a, z), one numeric character (0-9), and one special character (!, @, #, $, %, ^, &, *)</p>
+
+    <label for="preferences">Preference:</label>
+    <select id="preferences" name="preferences" required>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Home and Garden">Home and Garden</option>
+        <option value="Health and Beauty">Health and Beauty</option>
+        <option value="Toys and Games">Toys and Games</option>
+        <option value="Sports and Outdoors">Sports and Outdoors</option>
+        <option value="Books and Media">Books and Media</option>
+        <option value="Automotive">Automotive</option>
+        <option value="Pet Supplies">Pet Supplies</option>
+        <option value="Food and Beverage">Food and Beverage</option>
+    </select>
+    <button type="submit">Sign Up</button>
+</form>

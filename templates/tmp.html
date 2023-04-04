@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little_A</title>
+  <style>
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #232F3E;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #F3F3F3;
+    }
+    nav a {
+      color: #131921;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+  </style>
+  <script>
+    function postRequest(url) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.location.href = url;
+        }
+      }
+      xhr.send();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <button onclick="postRequest('/home')">Home</button>
+    <h1>Little_A</h1>
+    <div>
+      <button onclick="postRequest('/membership')">Membership</button>
+      <button onclick="postRequest('/cart')">Cart</button>
+    </div>
+  </header>
+  <nav>
+    {% for category in category_names %}
+      <a href="{{ category.name | lower }}.html">{{ category.name }}</a>
+    {% endfor %}
+  </nav>
+  <main>
+    <h2>Membership Status: {% if membership_status %}Member{% else %}Non-Member{% endif %}</h2>
+  </main>
+</body>
+</html>
+
+
+
+

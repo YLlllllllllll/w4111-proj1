@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little_A - Account</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #232F3E;
+    }
+    header a, header button {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      background-color: #232F3E;
+    }
+    header h1 {
+      margin: 0;
+      color: white;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+      background-color: #F3F3F3;
+    }
+    nav form {
+      display: inline;
+    }
+    button {
+      padding: 5px 10px;
+      background-color: #232F3E;
+      color: white;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #131921;
+    }
+    main {
+      padding: 20px;
+    }
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .item {
+      border: 1px solid #CCC;
+      border-radius: 5px;
+      padding: 15px;
+      flex: 1;
+      background-color: #F3F3F3;
+    }
+  </style>
+  <script>
+    function postRequest(url) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+          document.location.href = url;
+        }
+      }
+      xhr.send();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <button onclick="postRequest('/home')">Home</button>
+    <h1>Little_A</h1>
+    <div>
+      <form action="/account" method="post" style="display: inline;">
+        <button type="submit">Account</button>
+      </form>
+      <form action="/order" method="post" style="display: inline;">
+        <button type="submit">Order History</button>
+      </form>
+    </div>
+  </header>
+  <nav>
+    <form action="/electronics" method="post">
+      <button type="submit">Electronics</button>
+    </form>
+    <form action="/clothing" method="post">
+      <button type="submit">Clothing</button>
+    </form>
+    <form action="/home_and_garden" method="post">
+      <button type="submit">Home and Garden</button>
+    </form>
+    <form action="/health_and_beauty" method="post">
+      <button type="submit">Health and Beauty</button>
+    </form>
+    <form action="/toys_and_games" method="post">
+      <button type="submit">Toys and Games</button>
+    </form>
+    <form action="/sports_and_outdoors" method="post">
+      <button type="submit">Sports and Outdoors</button>
+    </form>
+    <form action="/book_and_media" method="post">
+      <button type="submit">Book and Media</button>
+    </form>
+    <form action="/automotive" method="post">
+      <button type="submit">Automotive</button>
+    </form>
+    <form action="/pet_supplies" method="post">
+      <button type="submit">Pet Supplies</button>
+    </form>
+    <form action="/food_and_beverage" method="post">
+      <button type="submit">Food and Beverage</button>
+    </form>
+  </nav>
+  <main>
+  <h2>Order Information</h2>
+  <form action="/payment" method="post">
+     <form action="/payment" method="post">
+    <div class="items">
+      {% for cart_item in cart_items %}
+        <div class="item">
+          <h3>{{ cart_item.product_name }}</h3>
+          <p>Price: {{ cart_item.product_unit_price }}</p>
+          <label for="quantity-{{ cart_item.product_id }}">Number of Product:</label>
+          <input type="number" id="quantity-{{ cart_item.product_id }}" name="quantity-{{ cart_item.product_id }}" min="1" value="{{ cart_item.quantity }}">
+          <input type="hidden" name="product_id" value="{{ cart_item.product_id }}">
+         <input type="hidden" name="product_name-{{ cart_item.product_id }}" value="{{ cart_item.name }}">
+         <input type="hidden" name="product_unit_price-{{ cart_item.product_id }}" value="{{ cart_item.product_unit_price }}">
+        </div>
+      {% endfor %}
+    </div>
+    <h2>Payment Information</h2>
+    <label for="payment-method">Payment Method:</label>
+    <select name="payment-method" id="payment-method">
+      <option value="credit_card">Credit Card</option>
+      <option value="debit_card">Debit Card</option>
+      <option value="paypal">PayPal</option>
+    </select>
+    <button type="submit">Submit Payment</button>
+  </form>
+</main>
+</body>
+</html>
